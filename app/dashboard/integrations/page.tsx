@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase-browser';
 
 interface QBConnection {
   id: string;
@@ -34,7 +34,7 @@ export default function IntegrationsPage() {
   const [desktopPassword, setDesktopPassword] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
 
   // Check for connection result in URL params
   useEffect(() => {
@@ -231,7 +231,7 @@ export default function IntegrationsPage() {
                     <p className="text-sm text-gray-500 mt-1">
                       Connected {new Date(conn.created_at).toLocaleDateString()}
                       {conn.last_sync_at && (
-                        <> Â· Last synced {new Date(conn.last_sync_at).toLocaleString()}</>
+                        <> ÃÂ· Last synced {new Date(conn.last_sync_at).toLocaleString()}</>
                       )}
                     </p>
                   </div>
@@ -338,7 +338,7 @@ export default function IntegrationsPage() {
                     <p className="text-sm text-gray-500 mt-1">
                       Set up {new Date(conn.created_at).toLocaleDateString()}
                       {conn.last_sync_at && (
-                        <> Â· Last synced {new Date(conn.last_sync_at).toLocaleString()}</>
+                        <> ÃÂ· Last synced {new Date(conn.last_sync_at).toLocaleString()}</>
                       )}
                     </p>
                   </div>
@@ -359,7 +359,7 @@ export default function IntegrationsPage() {
                   </div>
                 </div>
                 <p className="text-xs text-gray-400">
-                  Username: {conn.realm_id} Â· Install the .qwc file in QuickBooks Web Connector to start syncing
+                  Username: {conn.realm_id} ÃÂ· Install the .qwc file in QuickBooks Web Connector to start syncing
                 </p>
               </div>
             ))}
@@ -476,7 +476,7 @@ export default function IntegrationsPage() {
             <div className="w-8 h-8 bg-[#2c5282] text-white rounded-full flex items-center justify-center font-bold mb-2">2</div>
             <h3 className="font-medium text-gray-900 mb-1">Import</h3>
             <p className="text-gray-600">
-              Pull in your transactions â purchases, invoices, payments, deposits, and journal entries.
+              Pull in your transactions Ã¢ÂÂ purchases, invoices, payments, deposits, and journal entries.
             </p>
           </div>
           <div>
