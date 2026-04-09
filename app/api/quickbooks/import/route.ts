@@ -1,13 +1,12 @@
 import { NextResponse } from 'next/server';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { createClient } from '@supabase/supabase-js';
-import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase-server';
+import { createClient as createAdminClient } from '@supabase/supabase-js';
 import { fetchAllTransactions, normalizeTransaction } from '@/lib/quickbooks';
 
 export async function POST(request: Request) {
   try {
     // Verify user session
-    const supabase = createRouteHandlerClient({ cookies });
+    const supabase = createClient();
     const { data: { session } } = await supabase.auth.getSession();
 
     if (!session) {
@@ -22,7 +21,7 @@ export async function POST(request: Request) {
     }
 
     // Use service role for DB operations
-    const adminClient = createClient(
+    const adminClient = createAdminClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.SUPABASE_SERVICE_ROLE_KEY!
     );
@@ -149,7 +148,7 @@ export async function POST(request: Request) {
 // GET endpoint to check import status / fetch imported transactions
 export async function GET(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
+    const supabase = createClient();
     const { data: { session } } = await supabase.auth.getSession();
 
     if (!session) {
